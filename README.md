@@ -1,1 +1,1 @@
-# kat-habbit-tracker
+# kat-habit-tracker
