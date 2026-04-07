@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Column, String, DateTime, Integer, ForeignKey
-from app.models.base import Base
+from .base import Base
 
 
 class HabitLog(Base):
