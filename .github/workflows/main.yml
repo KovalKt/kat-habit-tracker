@@ -21,7 +21,7 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint --fail-under=6 .app/
+        pylint --fail-under=6 ./app
   run_tests:
     runs-on: ubuntu-latest
     strategy:
