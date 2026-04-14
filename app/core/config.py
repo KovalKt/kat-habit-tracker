@@ -1,6 +1,6 @@
 from functools import lru_cache
 from pydantic import Field
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Config(BaseSettings):
@@ -18,10 +18,12 @@ class Config(BaseSettings):
     API_PORT: int = Field(8000, env="API_PORT")
 
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
+    model_config = SettingsConfigDict(
+        env_file = ".env",
+        env_file_encoding = "utf-8",
+        case_sensitive = False,
+        extra = "ignore"
+    )
 
 
 @lru_cache()
