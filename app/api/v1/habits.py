@@ -15,14 +15,14 @@ router = APIRouter()
 def list_habits(user_id: int, db: Session = Depends(get_db)) -> list[HabitRead]:
     service = HabitService(db)
     habits = service.list_habits(user_id=user_id)
-    return [HabitRead.from_orm(habit) for habit in habits]
+    return [HabitRead.model_validate(habit) for habit in habits]
 
 
 @router.post("/", response_model=HabitRead, status_code=status.HTTP_201_CREATED)
 def create_habit(payload: HabitCreate, db: Session = Depends(get_db)) -> HabitRead:
     service = HabitService(db)
     habit = service.create_habit(payload)
-    return HabitRead.from_orm(habit)
+    return HabitRead.model_validate(habit)
 
 
 @router.patch("/{habit_id}", response_model=HabitRead)
@@ -33,4 +33,4 @@ def update_habit(
 ) -> HabitRead:
     service = HabitService(db)
     habit = service.update_habit(habit_id, payload)
-    return HabitRead.from_orm(habit)
+    return HabitRead.model_validate(habit)

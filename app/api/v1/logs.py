@@ -15,11 +15,11 @@ router = APIRouter()
 def list_logs(habit_id: int, db: Session = Depends(get_db)) -> list[HabitLogRead]:
     service = HabitService(db)
     logs = service.list_logs(habit_id=habit_id)
-    return [HabitLogRead.from_orm(log) for log in logs]
+    return [HabitLogRead.model_validate(log) for log in logs]
 
 
 @router.post("/", response_model=HabitLogRead, status_code=status.HTTP_201_CREATED)
 def create_log(payload: HabitLogCreate, db: Session = Depends(get_db)) -> HabitLogRead:
     service = HabitService(db)
     log = service.create_log(payload)
-    return HabitLogRead.from_orm(log)
+    return HabitLogRead.model_validate(log)

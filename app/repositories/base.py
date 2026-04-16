@@ -25,12 +25,15 @@ class BaseRepository(Generic[ModelT]):
         self.db.add(obj)
         self.db.commit()
         self.db.refresh(obj)
+
         return obj
 
     def update(self, obj: ModelT, **data) -> ModelT:
         for key, value in data.items():
             setattr(obj, key, value)
+
         self.db.add(obj)
         self.db.commit()
         self.db.refresh(obj)
+
         return obj
